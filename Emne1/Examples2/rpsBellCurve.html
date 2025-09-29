@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RPS Bell Curve</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 1rem;
+    }
+
+    canvas {
+      border: 1px solid #ccc;
+      background: white;
+      margin-top: 1rem;
+    }
+
+    h1 {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎲 Rock-Paper-Scissors Bell Curve</h1>
+  <p>Each game = 100 rounds — Net Score (wins - losses)</p>
+  <canvas id="chart" width="800" height="400"></canvas>
+
+  <script>
+    const TOTAL_SIMULATIONS = 1000000;
+    const roundsPerGame = 100;
+    const scoreCounts = {};
+
+    function getRandomChoice() {
+      return Math.floor(Math.random() * 3) + 1;
+    }
+
+    function playGame() {
+      let netScore = 0;
+      for (let i = 0; i < roundsPerGame; i++) {
+        const player = getRandomChoice();
+        const computer = getRandomChoice();
+
+        if (player === computer) continue;
+
+        if (
+          (player === 1 && computer === 3) ||
+          (player === 2 && computer === 1) ||
+          (player === 3 && computer === 2)
+        ) {
+          netScore++;
+        } else {
+          netScore--;
+        }
+      }
+      return netScore;
+    }
+
+    // Simulate games
+    for (let i = 0; i < TOTAL_SIMULATIONS; i++) {
+      const score = playGame();
+      scoreCounts[score] = (scoreCounts[score] || 0) + 1;
+    }
+
+    // Sort scores
+    const sortedScores = Object.keys(scoreCounts)
+      .map(Number)
+      .sort((a, b) => a - b);
+
+    // Chart setup
+    const canvas = document.getElementById('chart');
+    const ctx = canvas.getContext('2d');
+
+    const width = canvas.width;
+    const height = canvas.height;
+
+    const barWidth = width / sortedScores.length;
+    const maxCount = Math.max(...sortedScores.map(score => scoreCounts[score]));
+
+    // Draw bars
+    sortedScores.forEach((score, index) => {
+      const x = index * barWidth;
+      const barHeight = (scoreCounts[score] / maxCount) * (height - 40);
+
+      // Bar
+      ctx.fillStyle = '#4CAF50';
+      ctx.fillRect(x, height - barHeight, barWidth - 1, barHeight);
+
+      // Labels
+      if (score % 10 === 0) {
+        ctx.fillStyle = '#333';
+        ctx.font = '10px sans-serif';
+        ctx.fillText(score, x + barWidth / 4, height - 5);
+      }
+    });
+
+  </script>
+</body>
+</html>

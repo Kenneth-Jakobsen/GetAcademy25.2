@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app">
+
+    </div>
+
+<!-- -Tall
+- Heltall vs desimaltall
+- Pluss, minus, gange, dele og parenteser - modulus
+- omgjøring
+- tekst til tall: Number og parseInt inkludert forskjeller
+- tall til tekst: ‘’+ toFixed() toLocaleString()
+- Math
+- round, ceil og floor
+- min og max
+- random -->
+<script>
+
+//Models
+let randomNumber = getRandomNumber(1,100);
+let userInput = 0;
+let userAttempts = 0;
+let message = '';
+
+
+
+//Views
+function drawGame(){
+    document.getElementById('app').innerHTML = /*HTML*/`
+    <h1>Guess the number:</h1><br/>
+    <h2>Attempts:${userAttempts}</h2>
+    <input oninput="userInput=(this.value)" id="userInput" type="number"><br/>
+    <button onclick="userGuess()">Guess</button>
+    <div>${message}</div>
+    `
+}
+
+
+//Controller
+function userGuess(){
+    userAttempts++
+    if(userInput==randomNumber){
+        message = 'Du gjettet riktig'
+    }
+    else if(userInput<randomNumber){
+        message = 'For lavt'
+    }
+    else{
+        message = 'For hoyt'
+    }
+    drawGame()
+}
+
+function getRandomNumber(min, max){
+  return Math.floor(Math.random()*(max-min)+1)+min
+}
+
+drawGame()
+
+
+</script>
+
+
+
+</body>
+
+
+</body>
+</html>

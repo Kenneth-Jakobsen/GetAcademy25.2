@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button
+    onclick='addCircleFromInput(document.getElementById(`inputValueX`).value, document.getElementById(`inputValueY`).value, document.getElementById(`colorbg-select`).value,document.getElementById(`color-select`).value)'>Leggtil
+    sirkel</button>
+  <button
+    onclick='addRectangle(document.getElementById(`inputValueX`).value, document.getElementById(`inputValueY`).value, document.getElementById(`colorbg-select`).value,document.getElementById(`color-select`).value)'>Legg
+    til en rektangel</button>
+
+  <input id="inputValueX" type="number" placeholder="X" />
+  <input id="inputValueY" type="number" placeholder="Y" />
+
+  <select name="colorbg" id="colorbg-select">
+    <option value="">--Please choose an Fill Color--</option>
+    <option value="red">Red</option>
+    <option value="yellow">Yellow</option>
+    <option value="green">Green</option>
+    <option value="pink">Pink</option>
+  </select>
+
+  <select name="color" id="color-select">
+    <option value="">--Please choose an 2nd Color--</option>
+    <option value="red">Red</option>
+    <option value="yellow">Yellow</option>
+    <option value="green">Green</option>
+    <option value="pink">Pink</option>
+  </select>
+  <br />
+  <svg id="mySvg" width="800" height="600" style="background-color: lightgray;">
+  </svg>
+  <script>
+
+
+    function addCircle(x, y, color1, color2) {
+      document.getElementById('mySvg').innerHTML = /*HTML*/`
+          <circle cx=${x} cy=${y} r="40" stroke=${color2} stroke-width="4" fill=${color1} />            
+      `;
+    }
+
+    function addRectangle(x, y, color1, color2) {
+      console.log(x, y, color1, color2)
+      document.getElementById('mySvg').innerHTML = /*HTML*/`
+       <rect width="200" height="100" x=${x} y=${y} rx="20" ry="20" fill=${color1} stroke=${color2} stroke-width=5 />
+       `
+    }
+
+    function addCircleFromInput(inputValueX, inputValueY, bgColor, color) {
+      console.log(inputValueX, inputValueY)
+      addCircle(inputValueX, inputValueY, bgColor, color)
+    }
+
+  </script>
+</body>
+
+</html>

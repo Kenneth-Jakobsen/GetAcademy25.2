@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app{
+            background-color: whitesmoke;
+            height: 400px;
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+    </div>
+  <input oninput="updateDivColor()" type="range" id="range" name="range" min="0" max="100" />
+  <label for="range">Range</label></body>
+
+
+<script>
+
+let divElement = document.getElementById('app');
+
+function updateDivColor(){
+    let rangeValue  = document.getElementById('range').value;
+    if(rangeValue < 30){
+        console.log('red')
+        divElement.style.backgroundColor = 'red'
+    }
+    //if block example
+    if(rangeValue > 70){
+        console.log('green')
+        divElement.style.backgroundColor = 'green'
+    }
+    else{
+        console.log('yellow')
+        divElement.style.backgroundColor = 'yellow'
+    }
+}
+
+// function isTrue(value){
+//     if(value){
+//         console.log(true)
+//     };
+//     console.log(false)
+// };
+
+</script>
+
+</html>

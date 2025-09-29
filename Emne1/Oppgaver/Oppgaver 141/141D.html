@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+
+
+    <script>
+
+        let firstName = ''
+        let userEmail = ''
+        let isSubmitted = false;
+ 
+
+
+        let hasSubmittedForm = false;
+
+        function showForm() {
+            let html = ''
+            if (isSubmitted) {
+                html = /*HTML*/`
+                <input type="button" value="${firstName}" />
+                <input type="button" value="${email}">
+                <button onclick="submitForm()">Edit</button>`
+            }
+            else {
+                html =  /*HTML*/`
+                <input value="${firstName}" name="fName" oninput="firstName=this.value"  type="text" placeholder="Enter name"/>
+                <input value="${email}" name="myEmail" oninput="email=this.value"  type="text" placeholder="Enter email">
+                <button onclick="submitForm()">Submit</button>`
+            }
+            return html
+        }
+
+        function submitForm() {
+            if (firstName && email) {
+                isSubmitted = !isSubmitted
+                drawApp()
+            }
+            else {
+                alert('Please fill out the form')
+            }
+        }
+        
+        function drawApp() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            ${showForm()}`
+        }
+
+        drawApp()
+
+    </script>
+
+</body>
+
+</html>

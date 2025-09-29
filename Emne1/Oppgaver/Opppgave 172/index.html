@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="model.js"></script>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th{
+            background-color: blueviolet;
+            color: whitesmoke;
+        }
+
+        table {
+            width: 400px;
+        }
+
+        td {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+
+
+    <script>
+
+
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <table>
+            <tr>
+                <th>To do</th>
+                <th>Done date</th>
+                <th>Responsible</th>
+                <th>Done</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr class="toDoTableRow">
+              ${toDoListHtml()}
+            </tr>   
+            </table>
+            `
+        }
+        updateView();
+
+        function toDoListHtml() {
+            let html = ``
+            for (let i = 0; i < model.length; i++) {
+                html = /*HTML*/`<td>${model[i].text}</td>
+                <td>${model[i].doneDate}</td>
+                <td>${model[i].responsible}</td>
+                <td><input 
+                    onclick=toDoComplete(${i}) 
+                    type="checkbox" 
+                    ${model[i].doneDate ? "checked": ''}
+                    /></td>
+                <td style="cursor:pointer">✎</td>
+                <td style="cursor:pointer">🗑</td>
+                `
+            }
+            return html
+        }
+
+        function toDoComplete(index) {
+            const today = new Date().toISOString().slice(5, 10)
+            model[index].doneDate = today
+            updateView()
+        }
+
+
+    </script>
+</body>
+
+</html>

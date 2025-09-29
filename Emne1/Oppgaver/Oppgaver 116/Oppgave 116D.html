@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div id="trafficLight" class="trafficLight" onclick="step2()">
+            <div class="light" style="background-color: red;"></div>
+            <div class="light" style="background-color: gray;"></div>
+            <div class="light" style="background-color: gray;"></div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    function step1() {
+        document.getElementById('app').innerHTML = /*HTML*/`
+        <div id="trafficLight" class="trafficLight" onclick="step2()">
+            <div class="light" style="background-color: red;"></div>
+            <div class="light" style="background-color: gray;"></div>
+            <div class="light" style="background-color: gray;"></div>
+        </div>
+        `
+    }
+
+    function step2() {
+        document.getElementById('app').innerHTML = /*HTML*/`
+        <div id="trafficLight" class="trafficLight" onclick="step3()">
+            <div class="light" style="background-color: red;"></div>
+            <div class="light" style="background-color: yellow;"></div>
+            <div class="light" style="background-color: gray;"></div>
+        </div>
+        `
+    }
+
+    function step3() {
+        document.getElementById('app').innerHTML = /*HTML*/`
+        <div id="trafficLight" class="trafficLight" onclick="step4()">
+            <div class="light" style="background-color: gray;"></div>
+            <div class="light" style="background-color: gray;"></div>
+            <div class="light" style="background-color: green;"></div>
+        </div>
+        `
+    }
+
+    function step4() {
+        document.getElementById('app').innerHTML = /*HTML*/`
+        <div id="trafficLight" class="trafficLight" onclick="step1()">
+            <div class="light" style="background-color: gray;"></div>
+            <div class="light" style="background-color: yellow;"></div>
+            <div class="light" style="background-color: gray;"></div>
+        </div>
+        `
+    }
+
+</script>
+
+<style>
+    .trafficLight {
+        width: 3rem;
+        height: 10rem;
+        display: flex;
+        flex-direction: column;
+        background-color: black;
+        padding: 1rem;
+        gap: 1rem;
+        cursor: pointer;
+    }
+
+    .light {
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+    }
+</style>

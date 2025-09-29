@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors - MVC</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    // -------------------------------
+    // 🔸 MODEL – Game state variables
+    // -------------------------------
+    let userScore = 0;
+    let computerScore = 0;
+    let statusHTML = ''
+
+    // -------------------------------
+    // 🔸 VIEW – Draw UI and status
+    // -------------------------------
+    function drawGameView() {
+      document.getElementById('app').innerHTML = /*HTML*/`
+        <h1>Rock Paper Scissors</h1>
+        <div id="choices">
+          <input type="button" value="✊ Rock" onclick="handleUserChoice(1)">
+          <input type="button" value="✋ Paper" onclick="handleUserChoice(2)">
+          <input type="button" value="✌ Scissors" onclick="handleUserChoice(3)">
+        </div>
+            <div id="status">
+            ${statusHTML}
+            </div>
+      `;
+    }
+
+    function updateStatusHtml(userChoice, computerChoice, resultMessage) {
+       statusHTML = /*HTML*/`
+        <h2>Your Score: ${userScore} | Computer Score: ${computerScore}</h2>
+        <p>You chose: ${convertChoiceToText(userChoice)}</p>
+        <p>Computer chose: ${convertChoiceToText(computerChoice)}</p>
+        <p>Result: ${resultMessage}</p>
+      `;
+      drawGameView()
+    }
+
+    // -------------------------------
+    // 🔸 CONTROLLER – Game logic
+    // -------------------------------
+    function handleUserChoice(userChoice) {
+      const computerChoice = getRandomNumber(1, 3);
+      let message = '';
+
+      if (userChoice === computerChoice) {
+        message = 'Draw 😵‍💫';
+      } else if (
+        (userChoice === 1 && computerChoice === 3) ||
+        (userChoice === 2 && computerChoice === 1) ||
+        (userChoice === 3 && computerChoice === 2)
+      ) {
+        userScore++;
+        message = 'You win 🎉';
+      } else {
+        computerScore++;
+        message = 'You lose 😔';
+      }
+      updateStatusHtml(userChoice, computerChoice, message);
+    }
+
+    // -------------------------------
+    // 🔸 Utilities
+    // -------------------------------
+    function getRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function convertChoiceToText(choice) {
+      if (choice === 1) return '✊ Rock';
+      if (choice === 2) return '✋ Paper';
+      return '✌ Scissors';
+    }
+
+    drawGameView();
+  </script>
+</body>
+</html>

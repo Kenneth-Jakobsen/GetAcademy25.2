@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+</body>
+
+<script>
+
+    function drawApp() {
+        document.getElementById('app').innerHTML = /*HTML*/`
+
+        <div id='nameForm'>
+        </div>
+
+        <div id='numberForm'>
+        </div>
+
+        <div id='languageForm'>
+        </div>
+
+        <div id='vehicleForm'>
+        </div>
+        `
+
+    }
+
+    function drawNameForm() {
+        document.getElementById('nameForm').innerHTML = /*HTML*/`
+            <label for="fname">First name:</label><br />
+            <input type="text" id="fname"><br />
+            <label for="lname">Last name:</label><br />
+            <input type="text" id="lname"><br />`
+    }
+
+    function drawLanguageForm() {
+        document.getElementById('languageForm').innerHTML = /*HTML*/`
+             <input type="radio" id="html" name="fav_language">
+            <label for="html">HTML</label><br />
+            <input type="radio" id="css" name="fav_language">
+            <label for="css">CSS</label><br>
+            <input type="radio" id="javascript" name="fav_language">
+            <label for="javascript">JavaScript</label><br />
+        `
+    }
+
+    function drawVehicleForm() {
+        document.getElementById('vehicleForm').innerHTML = /*HTML*/`
+         <input type="checkbox" id="vehicle1">
+            <label for="vehicle1"> I have a bike</label><br />
+            <input type="checkbox" id="vehicle2">
+            <label for="vehicle2"> I have a car</label><br />
+            <input type="checkbox" id="vehicle3">
+            <label for="vehicle3"> I have a boat</label><br />
+        `
+    }
+
+    function drawNumberForm(type,name,text){
+        document.getElementById('numberForm').innerHTML+=/*HTML*/`
+            <label for=${name}>${text}:</label><br />
+            <input type=${type} min="1" max="100" step="1" id=${name}><br />
+        `
+    }
+
+    drawApp();
+    drawNumberForm('range','rangeNumber', "En til hundre");
+    // drawLanguageForm();
+    // drawVehicleForm();
+
+
+
+</script>
+
+</html>

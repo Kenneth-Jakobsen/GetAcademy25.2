@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 1px;
+            width: 300px;
+        }
+
+        .cell {
+            border: 1px solid #b5c7ff;
+            aspect-ratio: 1 / 1;
+        }
+
+        .cell:hover {
+            cursor: pointer;
+        }
+
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+
+
+    <script>
+
+        let randomNumber = getRandomNumber(0, 3)
+        let startTime;
+        let endTime = '';
+
+        function drawGame() {
+            startTime = new Date().getTime()
+            document.getElementById('app').innerHTML = /*HTML*/`
+        <div class="grid">
+            <div onclick="clicked(this)" class="cell ${randomNumber == 0 ? 'highlight' : ''}"></div>
+            <div onclick="clicked(this)" class="cell ${randomNumber == 1 ? 'highlight' : ''}"></div>
+            <div onclick="clicked(this)" class="cell ${randomNumber == 2 ? 'highlight' : ''}"></div>
+            <div onclick="clicked(this)" class="cell ${randomNumber == 3 ? 'highlight' : ''}"></div>
+            <h2>Reaction time:${endTime}</h2>
+        </div>`
+        }
+
+        function clicked(input) {
+            if (input.classList.contains('highlight')) {
+                randomNumber = getRandomNumber(0, 3)
+                endTime = (new Date().getTime() - startTime) / 1000
+                drawGame()
+            }
+        }
+
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+
+
+        drawGame()
+
+    </script>
+
+</body>
+
+</html>

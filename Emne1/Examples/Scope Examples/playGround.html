@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+
+    // DEMO: "Everything is (like) an object in JavaScript"
+
+    // Primitives
+    // let str = "Hello";
+    // let num = 42;
+    // let bool = true;
+    // let big = 123n;
+    // let sym = Symbol("id");
+    // let nothing = null;
+    // let notDefined;
+
+
+    // console.log("=== typeof checks ===");
+    // console.log(typeof str, str);          // "string"
+    // console.log(typeof num, num);          // "number"
+    // console.log(typeof bool, bool);        // "boolean"
+    // console.log(typeof big, big);          // "bigint"
+    // console.log(typeof sym, sym.toString());// "symbol"
+    // console.log(typeof nothing, nothing);  // "object" (quirk in JS!)
+    // console.log(typeof notDefined);        // "undefined"
+
+    // Objects
+    // console.log(typeof {});                // "object"
+    // console.log(typeof [1,2]);                // "object"
+    // console.log(typeof function(){});      // "function" (but also an object!)
+
+    // console.log("\n=== Object-like behavior of primitives ===");
+    // console.log(str.toUpperCase());        // "HELLO" (String methods)
+    // console.log(num.toFixed(2));           // "42.00" (Number methods)
+    // console.log(bool.valueOf());           // true (Boolean methods)
+
+    // console.log("\n=== Prototype checks ===");
+    // console.log(String.prototype.isPrototypeOf(str));   // true
+    // console.log(Number.prototype.isPrototypeOf(num));   // true
+    // console.log(Boolean.prototype.isPrototypeOf(bool)); // true
+
+    // console.log("\n=== Functions are objects too ===");
+    // function greet() {}
+    // greet.language = "JavaScript";         // add property to a function
+    // console.log(greet.language);           // "JavaScript"
+
+
+    // let duck ={
+    //     name:'Aflec',
+    //     numLeg: 2,
+    //     sayName(){
+    //         console.log(`The name of this duck is ${this.name}`)
+    //     }
+    // }
+    // const sayName = ()=>{}
+    // duck.sayName()
+
+    // const profile = {
+    //   name: "Alice Johnson",
+    //   age: 25,
+    //   nationality: "Norwegian",
+    //   location: "Oslo"
+    // };
+
+//     Key: name → Value: Alice
+//     Key: age → Value: 25
+//     Key: city → Value: Oslo
+
+    // function profileUpdate({name, age, nationality, location}){
+    //     console.log(name, age, location, nationality)
+    // }
+
+
+    // const stats = {
+    //   max: 56.78,
+    //   standard_deviation: 4.34,
+    //   median: 34.54,
+    //   mode: 23.87,
+    //   min: -0.75,
+    //   average: 35.85
+    // };
+
+    // function half({max,min}){
+    //     return (max + min) / 2
+    // }
+
+    // const refrigerator = {
+    //     //Key:Value
+    //     'milk': 1,
+    //     'eggs': 12,
+    // };
+
+
+
+    // function showFood() {
+    //     for (let food in refrigerator) {
+    //         console.log(food,refrigerator[food])
+    //     }
+    // }
+
+// 
+
+
+const users = {
+  Alan: {
+    online: false
+  },
+  Jeff: {
+    online: true
+  },
+  Sarah: {
+    online: false
+  }
+}
+
+function countOnline(allUsers){
+  let count = 0;
+  for(let user in allUsers){
+    if(allUsers[user].online){
+      count++
+    }
+  }
+  console.log(count)
+}
+
+
+
+
+
+</script>

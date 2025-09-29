@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Grade Tracker</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+
+        th {
+            background: #f0f0f0;
+        }
+
+        button {
+            margin: 0 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Student Grade Tracker</h1>
+
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Grade</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Students will be rendered here -->
+        </tbody>
+    </table>
+
+    <p><strong>Average grade:</strong> <span id="average">0</span></p>
+
+    <script>
+        // 1. Array of student objects
+        let students = [
+            { name: "Alice", grade: 4 },
+            { name: "Bob", grade: 5 },
+            { name: "Charlie", grade: 2 }
+        ];
+
+        // 2. Render the table
+        function renderTable() {
+            let tbody = document.querySelector("#studentTable tbody");
+            
+            // <tr>
+            //     <td></td>
+            //     <td></td>
+            //     <td>
+            //         <button>+</button>
+            //         <button>-</button>
+            //     </td>
+            // </tr>
+        }
+
+        // 3. Function to update a student’s grade
+        function updateGrade(index, change) {
+
+        }
+
+        // 4. Function to calculate average
+        function calculateAverage() {
+        }
+
+        // 5. Initial render
+        renderTable();
+        calculateAverage();
+    </script>
+</body>
+
+</html>

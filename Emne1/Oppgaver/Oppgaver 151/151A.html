@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div id="app">
+
+</div>
+
+<script>
+
+let text = ''
+let result = ''
+let maxLength = 0
+
+function updateView(){
+    document.getElementById('app').innerHTML = /*HTML*/`
+    <input type='text' onInput="text=(this.value)"/>
+    <button onclick="repeatText()">Repeat</button>
+    ${text ? /*HTML*/`<h2>${result}</h2>`:''}
+    `
+}
+
+function repeatText(){
+    maxLength++
+    for(let i=0; i<maxLength; i++){
+        result += text
+    }
+    updateView()
+}
+
+
+
+updateView();
+
+</script>
+
+</body>
+</html>

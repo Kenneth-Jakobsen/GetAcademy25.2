@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div id="text--div" style="font-size:36pt;">I am a text</div>
+        <button onclick="increaseFontSize()">Increase Font Size</button>
+        <button onclick="decreaseFontSize()">Decrease Font Size</button>
+        <select name="" id="font--value">
+            <option value="Arial">Arial</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Times New Roman">Times New Roman</option>
+        </select>
+        <button onclick="changeFont()">Change font</button>
+        
+        <div>
+            <button onclick="increaseRed()">Increase Red color value</button>
+            <button>Increase Blue color value</button>
+            <button>Increase Green color value</button>
+
+            <button>Decrease Red color value</button>
+            <button>Decrease Blue color value</button>
+            <button>Decrease Green color value</button>
+        </div>
+    </div>
+</body>
+
+
+<script>
+
+let textElement = document.getElementById('text--div');
+let redValue = 125;
+let blueValue = 125;
+let greenValue = 125;
+
+
+function increaseFontSize(){
+    let fontSize = textElement.style.fontSize;
+    let currentFontSize = parseFloat(fontSize)
+    textElement.style.fontSize =`${currentFontSize+1}pt`;
+}
+
+function decreaseFontSize(){
+    let fontSize = textElement.style.fontSize;
+    let currentFontSize = parseFloat(fontSize)
+    textElement.style.fontSize =`${currentFontSize-1}pt`;
+}
+
+function changeFont(){
+    let fontValue = document.getElementById('font--value').value;
+    textElement.style.fontFamily = fontValue
+}
+
+function increaseRed(){
+    redValue += 5;
+    console.log(textElement.style.color)
+    textElement.style.backgroundColor = `rgb(${redValue}, ${greenValue}, ${blueValue})`
+}
+
+</script>
+</html>

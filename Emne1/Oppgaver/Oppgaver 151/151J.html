@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+
+    </div>
+
+
+
+    <script>
+
+        let userText;
+        let vocals = 'aeiouyæøå';
+        let vowelCount = 0;
+        let wordCount = 0;
+        let longestWord = ''
+
+        function drawApp() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; max-width: 600px; margin: 2rem auto; font-family: sans-serif;">
+            <h2>Text Analyzer</h2>
+            <textarea 
+                type="text" 
+                oninput="userText = this.value"
+                placeholder="Enter your text here..." 
+                style="width: 100%; min-height: 150px; padding: 1rem; font-size: 1rem; border: 1px solid #ccc; border-radius: 8px; resize: vertical; resize:none;">${userText ? userText : ''}</textarea>
+            <button 
+                onclick="analyzeText()" 
+                style="padding: 0.5rem 1.5rem; font-size: 1rem; background-color: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                Analyze Text
+            </button>
+        </div>
+            <div>
+                <p>The longets word in the text is: ${longestWord}</p>
+                <p>The text has ${vowelCount} vowels</p>
+                <p>The text has ${wordCount} word</p>
+            </div>
+        `
+        }
+
+
+        function analyzeText() {
+            countVowels()
+            countWords()
+            findLongestWord()
+            drawApp()
+        }
+
+
+        function countWords() {
+            wordCount = userText.trim()
+                .split(/\s+/)
+                .map(word => word.replace(/[^a-zA-ZæøåÆØÅ]/g, ''))
+                .filter(elem => isWord(elem)).length;
+        }
+
+        function countVowels() {
+            for (let i = 0; i < userText.length; i++) {
+                if(vocals.includes(userText[i])){
+                    vowelCount++
+                }
+            }
+        }
+
+        function findLongestWord(){
+            let textArray = userText.split(' ')
+            for(let i=0; i<textArray.length; i++){
+                if(!isWord(textArray[i])) continue
+                if(textArray[i].length > longestWord.length){
+                    longestWord = textArray[i]
+                }
+            }
+        }
+
+
+        function isWord(word) {
+            return /^[a-zA-ZæøåÆØÅ]+(-[a-zA-ZæøåÆØÅ]+)*$/.test(word);
+        }
+
+
+
+        drawApp()
+
+    </script>
+</body>
+
+</html>

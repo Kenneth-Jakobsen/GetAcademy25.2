@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            display: grid;
+            grid-template: repeat(3, 1fr)/ repeat(3, 1fr);
+            aspect-ratio: 1/1;
+            height: 400px;
+            gap: 2px;
+            background: #d3d3d3;
+            border-radius: 5px;
+            padding: 1px;
+        }
+
+        #app>div {
+            font-size: 3rem;
+            font-family: fantasy;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid black;
+            border-radius: 20px;
+            background-color: whitesmoke;
+        }
+
+        #app>div:hover {
+            cursor: pointer;
+        }
+
+        .hide-piece {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="border: 5px solid black;" id="app">
+    </div>
+
+    <script>
+
+        function drawPuzzle() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <div onclick="movePiece(this,'piece-1','piece-3')" id="piece-0"></div>
+            <div onclick="movePiece(this,'piece-2','piece-0','piece-4', '')" id="piece-1">1</div>
+            <div onclick="movePiece(this,'piece-1','piece-5','', '')" id="piece-2">2</div>
+            <div onclick="movePiece(this,'piece-0','piece-4','piece-6', '')" id="piece-3">3</div>
+            <div onclick="movePiece(this,'piece-1','piece-3','piece-5', 'piece-7')" id="piece-4">4</div>
+            <div onclick="movePiece(this,'piece-2','piece-4','piece-8', '')"id="piece-5">5</div>
+            <div onclick="movePiece(this,'piece-3','piece-7','', '')" id="piece-6">6</div>
+            <div onclick="movePiece(this,'piece-4','piece-6','piece-8', '')" id="piece-7">7</div>
+            <div onclick="movePiece(this,'piece-7','piece-5','', '')" id="piece-8">8</div>
+            `
+        }
+
+
+        function movePiece(currentPiece, param1, param2, param3, param4) {
+            let firstNeighBour = document.getElementById(param1);
+            let secondNeighbour = document.getElementById(param2);
+            let thirdNeighBour = document.getElementById(param3);
+            let forthNeighBour = document.getElementById(param4);
+            const emptyPiece = document.querySelector("#app div:empty");
+            
+            if (firstNeighBour.innerHTML == '') {
+                firstNeighBour.innerHTML = currentPiece.innerHTML
+                currentPiece.innerHTML = '';
+            }
+            else if (secondNeighbour.innerHTML == '') {
+                secondNeighbour.innerHTML = currentPiece.innerHTML
+                currentPiece.innerHTML = ''
+                
+            }
+            else if (thirdNeighBour.innerHTML == '') {
+                thirdNeighBour.innerHTML = currentPiece.innerHTML
+                currentPiece.innerHTML = ''
+                
+            }
+            else if (forthNeighBour.innerHTML == '') {
+                forthNeighBour.innerHTML = currentPiece.innerHTML
+                currentPiece.innerHTML = ''
+            }
+
+        }
+
+        drawPuzzle();
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h3>Mitt skjema</h3>
+
+    <div class="form-row">
+      <label for="fname">First Name</label>
+      <input type="text" id="fname">
+    </div>
+
+    <div class="form-row">
+      <label for="lname">Last Name</label>
+      <input type="text" id="lname">
+    </div>
+
+    <div class="form-row">
+      <label for="range">En til hundre</label>
+      <input type="range" id="range">
+    </div>
+
+    <div class="form-row">
+      <label for="number">Skriv inn et tall</label>
+      <input type="number" id="number">
+    </div>
+
+    <div class="form-row">
+      <label>Favorittspråk:</label>
+      <div class="radio-group">
+        <label><input type="radio" name="fav_language"> HTML</label><br />
+        <label><input type="radio" name="fav_language"> CSS</label><br />
+        <label><input type="radio" name="fav_language"> JavaScript</label>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<style>
+  #app {
+    font-family: sans-serif;
+    max-width: 400px;
+    margin: 20px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  label {
+    margin-right: 10px;
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: row;
+  }
+</style>
+
+</html>

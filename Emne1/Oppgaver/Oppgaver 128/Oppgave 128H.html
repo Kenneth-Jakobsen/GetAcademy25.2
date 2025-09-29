@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #app {
+            display: grid;
+            height: 400px;
+            aspect-ratio: 1/1;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            /* border: black solid 1px; */
+            margin: 2rem auto;
+            font-family: sans-serif;
+        }
+
+
+        #calc-input {
+            width: 100%;
+            height: 100%;
+            grid-column: 1/-1;
+            font-size: 4rem;
+            text-align: right;
+            border-radius: 0.5rem;
+        }
+
+        .calc-button {
+            background: #eee;
+            border: 2px solid #ddd;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .calc-button:hover {
+            background-color: #ddd;
+        }
+
+        .calc-button:active {
+            background: #ccc;
+            transform: scale(0.95);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+    </div>
+
+
+
+
+    <script>
+
+        let appDiv = document.getElementById('app');
+        let calculatorSign = '/*-+';
+        let firstInput;
+        let secondInput;
+        let calculatorDisplay;
+        let inputSign;
+
+
+
+        function drawCalculator() {
+            appDiv.innerHTML = /*HTML*/`
+            <input id="calc-input" type="text" value="${calculatorDisplay ? calculatorDisplay.value : ''}" readonly/>
+            <div onclick="calculate(this)" class="calc-button">7</div>
+            <div onclick="calculate(this)" class="calc-button">8</div>
+            <div onclick="calculate(this)" class="calc-button">9</div>
+            <div onclick="calculate(this)" class="calc-button">/</div>
+            <div onclick="calculate(this)" class="calc-button">4</div>
+            <div onclick="calculate(this)" class="calc-button">5</div>
+            <div onclick="calculate(this)" class="calc-button">6</div>
+            <div onclick="calculate(this)" class="calc-button">*</div>
+            <div onclick="calculate(this)" class="calc-button">1</div>
+            <div onclick="calculate(this)" class="calc-button">2</div>
+            <div onclick="calculate(this)" class="calc-button">3</div>
+            <div onclick="calculate(this)" class="calc-button">-</div>
+            <div onclick="calculate(this)" class="calc-button">0</div>
+            <div onclick="clearCalc()" class="calc-button">C</div>
+            <div onclick="sum()" class="calc-button">=</div>
+            <div onclick="calculate(this)" class="calc-button">+</div>    
+            `
+        }
+
+        function calculate(input) {
+            calculatorDisplay = document.getElementById('calc-input');
+            let value = input.textContent
+            if (calculatorSign.includes(value) && calculatorDisplay.value != '') {
+                inputSign = value;
+                firstInput = +calculatorDisplay.value;
+                calculatorDisplay.value = ''
+            }
+            else if (inputSign != '' && firstInput) {
+                calculatorDisplay.value += value;
+                secondInput = +calculatorDisplay.value;
+            }
+            else {
+                calculatorDisplay.value += value;
+            }
+        }
+
+        function clearCalc() {
+            firstInput = '';
+            secondInput = '';
+            calculatorDisplay.value = '';
+            inputSign = '';
+            drawCalculator();
+        }
+
+        function sum() {
+            let sum = ''
+            switch (inputSign) {
+                case '+': sum = firstInput + secondInput; break;
+                case '-': sum = firstInput - secondInput; break;
+                case '*': sum = firstInput * secondInput; break;
+                case '/': sum = firstInput / secondInput; break;
+            }
+            firstInput = '';
+            secondInput = '';
+            calculatorDisplay.value = sum;
+            drawCalculator();
+        }
+        drawCalculator();
+
+    </script>
+
+
+</body>
+
+</html>

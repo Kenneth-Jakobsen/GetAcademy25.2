@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       
+    </div>
+</body>
+</html>
+
+<script>
+
+
+const secretNumber = getRandomNumber(1,10)
+let userInput = 0;
+let userTries = 0;
+
+drawGame()
+
+
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function drawGame(){
+    document.getElementById('app').innerHTML = /*HTML*/`
+    <h1>Guess the number between 1 and 10 :</h1><br/>
+    <h2>Attempts:${userTries}</h2>
+    <input onchange="userGuess()" id="userInput" type="number"><br/>
+    <button onclick="userGuess()">Guess</button>
+    `
+}
+
+
+function userGuess(){
+    let userInput = document.getElementById('userInput').value
+    if(userInput == secretNumber){
+        console.log(`🎉 You guessed correct! The number was ${secretNumber}`)
+        drawGame()
+    }
+    else if(userInput<secretNumber){
+        userTries++
+        console.log(`Too low`)
+        drawGame()
+
+    }
+    else{
+        userTries++
+        console.log(`Too high`)
+        drawGame()
+    }
+}
+
+
+</script>

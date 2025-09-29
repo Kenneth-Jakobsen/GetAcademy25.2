@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+
+        <table id="myTable">
+            <tr>
+                <th>Dag</th>
+                <th>Time</th>
+                <th>Minutt</th>
+                <th>Temperatur</th>
+            </tr>
+        </table>
+        <div id="input--div">
+            <input id="input--day" type="text" placeholder="Dag">
+            <input id="input--hour" type="number" placeholder="Time">
+            <input id="input--minute" type="number" placeholder="Minutt">
+            <input id="input--temperature" type="number" placeholder="Temperatur">
+            <input id="input--tag" type="text" placeholder="Tag">
+        </div>
+        <button onclick="addRow()">Legg til en rad</button>
+    </div>
+</body>
+
+<script>
+
+    function addRow() {
+        let day = document.getElementById('input--day').value;
+        let hour = document.getElementById('input--hour').value;
+        let minutes = document.getElementById('input--minute').value;
+        let temperature = document.getElementById('input--temperature').value;
+        let tag = document.getElementById('input--tag').value;
+        document.getElementById('myTable').innerHTML += /*HTML*/`<tr>
+            <${tag}>${day}</${tag}>
+            <${tag}>${hour}</${tag}>
+            <${tag}>${minutes}</${tag}>
+            <${tag}>${temperature}</${tag}>
+            </tr>`
+    }
+
+</script>
+
+<style>
+    #input--div {
+        display: grid;
+        grid-template-columns: 45px 55px 64px 100px 50px;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td,
+    th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    th {
+        background-color: #04AA6D;
+        color: white;
+    }
+</style>
+
+</html>

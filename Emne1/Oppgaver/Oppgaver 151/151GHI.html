@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <pre id="output"></pre>
+    </div>
+
+
+    <script>
+
+        function drawStar() {
+            document.getElementById('output').innerText += '*';
+        }
+
+        function writeSpace() {
+            document.getElementById('output').innerText += '-';
+        }
+
+        function writeLineBreak() {
+            document.getElementById('output').innerText += '\n';
+        }
+
+
+
+
+
+
+        function drawPyramid(rows = 4, stars = 8) {
+            for (let rowIndex = 0; rowIndex < rows; rowIndex++) {
+                for (let k = 0; k < rowIndex; k++) {
+                    writeSpace()
+                }
+
+                for (let j = 0; j < stars - (2 * rowIndex); j++) {
+                    drawStar()
+                }
+                writeLineBreak()
+            }
+        }
+
+        // drawPyramid()
+
+
+
+
+        function drawDiamond(rows) {
+            for (let i = 0; i < rows; i++) {
+
+                for (let j = 0; j < rows - i - 1; j++) {
+                    writeSpace();
+                }
+
+                for (let k = 0; k < (2 * i) + 2; k++) {
+                    drawStar()
+                }
+
+                writeLineBreak()
+            }
+
+
+            for (let i = 0; i < rows; i++) {
+
+                for (let k = 0; k < i; k++) {
+                    writeSpace()
+                }
+
+                for (let j = rows * 2; j > (2 * i); j--) {
+                    drawStar()
+                }
+
+                writeLineBreak()
+            }
+
+        }
+
+
+
+        // for (let i = 0; i < 4; i++) {
+
+        //     for (j = 0; j < i; j++) {
+        //         writeSpace()
+        //     }
+        //     for (let j = 0; j < i + 1; j++) {
+        //         drawStar()
+        //     }
+        //     for (j = 0; j < 12 - (4 * i); j++) {
+        //         writeSpace()
+        //     }
+        //     for (let j = 0; j < i + 1; j++) {
+        //         drawStar()
+        //     }
+        //     writeLineBreak()
+        // }
+
+        // for (let i = 0; i < 4; i++) {
+
+        //     for (let j = 0; j < 4 - i - 1; j++) {
+        //         writeSpace();
+        //     }
+        //     for (let j = 0; j < 4 - i; j++) {
+        //         drawStar();
+        //     }
+        //     for (let j = 0; j < i * 4; j++) {
+        //         writeSpace();
+        //     }
+        //     for (let j = 0; j < 4 - i; j++) {
+        //         drawStar();
+        //     }
+        //     writeLineBreak();
+        // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

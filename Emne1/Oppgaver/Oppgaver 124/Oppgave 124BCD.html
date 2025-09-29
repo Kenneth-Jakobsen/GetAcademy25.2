@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+</body>
+</html>
+
+<script>
+
+function convertToFahrenheit(tempInCelcius){
+    return tempInCelcius * (9/5) + 32 + ' Fahrenheit'
+}
+
+function convertToCelcius(tempInFahrenheit){
+    return (tempInFahrenheit - 32) * (5/9) + ' Celcius'
+}
+
+function convertTemperature(temperature, degrees){
+    if(temperature == 'Celcius'.toLowerCase()){
+        return degrees * (9/5) + 32 + ' Fahrenheit'
+    }
+    return (degrees - 32) * (5/9) + ' Celcius'
+    
+}
+
+</script>

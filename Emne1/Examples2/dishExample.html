@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            padding: 2rem;
+        }
+
+        .card {
+            max-width: 560px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .row {
+            display: grid;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input,
+        select,
+        button {
+            padding: .6rem .8rem;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .result {
+            background: #f7f7f7;
+            border-radius: 12px;
+            padding: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+    <button onclick="getResult()">Submit</button>
+
+    <script>
+
+        //Model
+        let nameValue = '';
+        let personality = '';
+        let resultDish = '';
+        let resultFact = '';
+        let resultMessage = ''
+
+        //View
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <div class="card">
+                <h1>Hver er du som matrett</h1>
+                <p>Fyll inn navn og velg personlighetstype</p>
+
+                <div class="row">
+                    <label for="nameInput">Navn</label>
+                    <input id="nameInput" 
+                    type="text" 
+                    placeholder="Skriv navnet ditt" 
+                    value="${nameValue}"
+                    onInput="nameValue=(this.value)"
+                    autofocus />
+                </div>
+
+                <div class="row">
+                    <label for="typeSelect">Personlighetstype</label>
+                    <select id="typeSelect" onChange="personality=(this.value)">
+                        <option value="">Velg type...</option>
+                        <option value="introvert">Introvert</option>
+                        <option value="ekstrovert" >Ekstrovert</option>
+                        <option value="kreativ">Kreativ</option>
+                        <option value="analytisk">Analytisk</option>
+                        <option value="eventyrlysten">Eventyrlysten</option>
+                        <option value="omsorgsfull">Omsorgsfull</option>
+                    </select>
+                </div>                
+                ${resultDish ? /*HTML*/`
+                    <div class="result">
+                        <h2>Du er: ${resultDish}</h2>
+                        <p>Fun Fact: ${resultFact}</p>
+                        <p>${resultMessage}</p>
+                    </div>` : ''}
+            </div>
+    `}
+
+        //Controller
+        function getResult() {
+            switch (personality) {
+                case "introvert":
+                    resultDish = `Sushi`;
+                    resultFact = `Sushi handler om balanse og enkelt råvarefokus subtilt, presist og elegant`;
+                    resultMessage = `${nameValue}, Du liker kvalitet fremfor støy og det merkes.`;
+                    break;
+                case "ekstrovert":
+                    resultDish = 'Taco';
+                    resultFact = 'Taco er sosialt og lekent uendelige kombinasjoner og alltid feststemning.';
+                    resultMessage = `${nameValue}, du sprer energi folk samler seg rundt deg.`;
+                    break;
+                case "kreativ":
+                    resultDish = 'Tapas';
+                    resultFact = 'Småretter som kan mikses og matches perfekt for en oppfinner med mange idéer.';
+                    resultMessage = `${nameValue}, du tenker "variasjon er aldri kjedelig"`;
+                    break;
+                case "analytisk":
+                    resultDish = 'Lasagne';
+                    resultFact = 'Lag på lag med struktur, rekkefølge og timing gir best resultat.';
+                    resultMessage = `${nameValue}, du bygger ting grundig solid håndverk.`;
+                    break;
+                case "eventyrlysten":
+                    resultDish = 'Ramen';
+                    resultFact = 'Dyp smak og mange stiler, en bolle som inviterer til utforsking.';
+                    resultMessage = `${nameValue}, du søker nye smaker, ekte nysgjerrighet.`;
+                    break;
+                case "omsorgsfull":
+                    resultDish = 'Gryterett';
+                    resultFact = 'Varmes sakte, metter mange og samler folk rundt bordet.';
+                    resultMessage = `${nameValue}, du får alle til å føle seg vel, ekte varme.`;
+                    break;
+                default:
+                    resultDish = 'Mystisk miks';
+                    resultFact = 'Full av overraskelser, akkurat som deg!';
+                    resultMessage = `${nameValue}, du har din egen vri, og det funker!`;
+            }
+            updateView();
+        }
+
+        
+        updateView()
+
+    </script>
+
+</body>
+
+</html>

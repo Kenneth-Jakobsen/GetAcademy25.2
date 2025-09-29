@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+</body>
+</html>
+
+<script>
+
+let mainDiv = document.getElementById('app');
+let points = 0;
+let pointsPerClick = 1;
+
+
+function drawGame(){
+    mainDiv.innerHTML = /*HTML*/`
+        <div id="app" style='display: flex;align-items: center;'>
+            <div id='' style="font-size: 300%;">${points}</div>
+                <div style="display: flex; flex-direction: column;align-items: flex-start; margin-left:10px">
+                    <button onclick="increasePointByOne()">+</button>
+                    <button onclick="upgrade()">X2</button>
+                </div>
+        </div>
+
+    `
+}
+
+function increasePointByOne(){
+    points += pointsPerClick
+    drawGame()
+}
+
+
+function upgrade(){
+    if(points >= 10){
+        points -= 10;
+        console.log(points)
+        pointsPerClick++;
+        drawGame();
+    }
+    else{
+        alert('You need at least 10 points for an upgrade')
+    }
+    drawGame()
+}
+
+drawGame()
+
+</script>

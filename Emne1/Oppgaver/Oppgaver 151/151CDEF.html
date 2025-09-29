@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+    </div>
+
+    <script>
+
+        let text = ''
+        let result = ''
+        let desiredLetter = ''
+        
+        function drawApp(){
+            console.log(result)
+            document.getElementById('root').innerHTML = /*HTML*/`
+            <input type="text" placeholder="Type in your text" onInput="text=(this.value)" /><br/>
+            <input type="text" placeholder="Type in your desired letter" onInput="desiredLetter=(this.value)" /><br/>
+            <button onclick="reverseText()">Reverse text</button><br/>
+            <button onclick="findAllA()">Count all A</button><br/>
+            <button onclick="findDesired()">Count desired letters</button><br/>
+            <p>${result}</p>
+            `
+        }
+
+        
+        function reverseText(){
+            result = ''
+            for(let i=text.length-1; i>=0; i--){
+                result += text[i];
+            }
+            drawApp();
+        }
+
+        function findAllA(){
+            result = 0
+            for(let i=0; i<text.length; i++){
+                if(text[i].toLowerCase()=='a'){
+                    result+=1
+                }
+            }
+            drawApp()
+        }
+
+        function findDesired(){
+            result = 0
+            for(let i=0; i<text.length; i++){
+                if(text[i].toLowerCase()==desiredLetter){
+                    result++
+                }
+            }
+            drawApp();
+        }
+
+        drawApp();
+
+    </script>
+
+</body>
+</html>

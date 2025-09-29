@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+    </div>
+
+    <script>
+
+
+        let startValue;
+        let endValue;
+        let increment;
+
+        function updateView(){
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <input type="number" onInput="startValue=(this.value)" placeholder="Enter start value" />
+            <input type="number" onInput="endValue=(this.value)" placeholder="Enter end value"/>
+            <input type="number" onInput="increment=(this.value)" placeholder="Enter changing value"/><br/>    
+            <button onclick="countNumber()">Start</button><br/>        
+            `
+        }
+
+        function countNumber(){
+            for(let i = +startValue; i<= +endValue; i+= +increment){
+                document.getElementById('app').innerHTML += /*HTML*/`
+                <div>${i}</div>
+                ` 
+            }
+        }
+
+
+        updateView();
+
+    </script>
+
+</body>
+</html>

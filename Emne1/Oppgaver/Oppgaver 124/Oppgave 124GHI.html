@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+</body>
+
+</html>
+
+<script>
+
+    let mainDiv = document.getElementById('app');
+
+    mainDiv.innerHTML += createNumberSelector(1,1,31, 'Day')
+    mainDiv.innerHTML += createNumberSelector(3, 1, 31, 'Month')
+    mainDiv.innerHTML += createNumberSelector(2025, 2020, 2030, 'Year')
+    mainDiv.innerHTML += /*HTML*/`<button onclick="getDate()">Get the date</button>`
+
+
+    function createNumberSelector(value, min, max, name) {
+    return /*HTML*/`
+        <div id="${name}Main" style='display: flex;align-items: center;'>
+            <div id='${name}Number' style="font-size: 300%;">${value}</div>
+                <div style="display: flex; flex-direction: column;align-items: flex-start;">
+                    <button onclick="select${name}(${value+1})" ${value >= max ? 'disabled' : ''}>▲</button>
+                    <button onclick="select${name}(${value-1})" ${value <= min ? 'disabled' : ''}>▼</button>
+                </div>
+        </div>`
+    }
+
+    
+    function selectDay(day){
+        document.getElementById('DayMain').outerHTML = createNumberSelector(day, 1, 31, 'Day');
+    }
+
+    function selectMonth(month){
+        document.getElementById('MonthMain').outerHTML = createNumberSelector(month, 1, 12, 'Month');
+    }
+
+    function selectYear(year){
+        document.getElementById('YearMain').outerHTML = createNumberSelector(year, 2020, 2030, 'Year');
+    }
+
+    function getDate(){
+        let day = document.getElementById('DayNumber').innerText;
+        let month = document.getElementById('MonthNumber').innerText;
+        let year = document.getElementById('YearNumber').innerText;
+        console.log(`The date is ${day}.${month}.${year}`)
+
+    }
+
+</script>

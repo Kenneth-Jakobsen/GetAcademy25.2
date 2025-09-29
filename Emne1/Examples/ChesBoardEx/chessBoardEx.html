@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #app {
+            display: grid;
+            grid-template-columns: repeat(8, 100px);
+            grid-template-rows: repeat(8, 100px);
+        }
+
+        .whitePiece {
+            background-color: rgb(240, 217, 181);
+        }
+
+        .darkPiece {
+            background-color: rgb(181, 136, 99);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+
+<script>
+
+function drawBoard(){
+    document.getElementById('app').innerHTML = (drawPattern().repeat(4) + drawSecondPattern().repeat(4)).repeat(4)
+}
+
+function drawLightSquare(){
+    return /*HTML*/`<div class="whitePiece"></div>`
+}
+
+function drawDarkSquare(){
+    return /*HTML*/`<div class="darkPiece"></div>`
+}
+
+function drawPattern() {
+    return drawLightSquare() + drawDarkSquare()
+}
+
+function drawSecondPattern(){
+    return drawDarkSquare() + drawLightSquare()
+}
+
+drawBoard()
+
+</script>
+
+</body>
+
+</html>

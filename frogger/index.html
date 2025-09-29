@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Frogger Mini</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        td {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            border: 1px solid #ccc;
+            font-size: 20px;
+        }
+
+        .frog {
+            background: lightgreen;
+        }
+
+        .car {
+            background: tomato;
+        }
+
+        .empty {
+            background: white;
+        }
+
+        .win {
+            background: gold;
+        }
+
+        .lose {
+            background: gray;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Frogger Mini</h1>
+    <button onclick="resetGame()">Reset</button>
+    <button onclick="moveFrog('up')">⬆️</button>
+    <button onclick="moveFrog('left')">⬅️</button>
+    <button onclick="moveFrog('right')">➡️</button>
+    <button onclick="moveFrog('down')">⬇️</button>
+
+    <div id="game"></div>
+
+    <script>
+        const rowCount = 6;
+        const colCount = 6;
+
+        // 0 = tom, 1 = frosk, 2 = bil, -1 = tap, -2 = vinn
+        let model = [
+            0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0,
+            0, 2, 0, 0, 0, 0
+        ];
+
+        function getBoardIndex(col, row) {
+            if (col < 0 || row < 0 || col >= colCount || row >= rowCount) return -1;
+            return row * colCount + col;
+        }
+
+        function resetGame() {
+            // Sett alle til 0
+            for (let i = 0; i < model.length; i++) {
+                model[i] = 0;
+            }
+
+            // Frosk nederst i midten
+            let frogCol = Math.floor(colCount / 2);
+            model[getBoardIndex(frogCol, rowCount - 1)] = 1;
+
+            // Biler på to rader
+            for (let c = 0; c < colCount; c += 2) {
+                model[getBoardIndex(c, 2)] = 2;
+                model[getBoardIndex((c + 1) % colCount, 3)] = 2;
+            }
+
+            render();
+            console.log("Model after reset:", model);
+        }
+
+        function moveFrog(direction) {
+            // TODO: flytt frosken
+            console.log("Move frog:", direction);
+            render();
+        }
+
+        function moveCars() {
+            // TODO: flytt bilene
+            console.log("Cars move");
+            render();
+        }
+
+        function render() {
+            let html = "<table>";
+            for (let r = 0; r < rowCount; r++) {
+                html += "<tr>";
+                for (let c = 0; c < colCount; c++) {
+                    let val = model[getBoardIndex(c, r)];
+                    let cls = "empty";
+                    let symbol = "";
+                    if (val === 1) { cls = "frog"; symbol = "🐸"; }
+                    else if (val === 2) { cls = "car"; symbol = "🚗"; }
+                    else if (val === -1) { cls = "lose"; symbol = "💀"; }
+                    else if (val === -2) { cls = "win"; symbol = "🏆"; }
+                    html += `<td class="${cls}">${symbol}</td>`;
+                }
+                html += "</tr>";
+            }
+            html += "</table>";
+            document.getElementById("game").innerHTML = html;
+        }
+
+        resetGame();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+
+
+
+    <script>
+
+        
+        let myBgColor = '';
+        let myColor = '';
+
+
+        function drawInput() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <select onchange="myColor=this.value" name='color'>
+                <option value="">--Please choose text color--</option>
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="yellow">Yellow</option>
+            </select>
+
+            <select onchange="myBgColor=this.value" name='color'>
+                <option value="">--Please choose a background color--</option>
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="yellow">Yellow</option>
+            </select>
+            <button onclick="addElement()">Add custom div</button>
+            `
+
+        }
+
+
+        function addElement() {
+            if (myBgColor && myColor) {
+                document.getElementById('app').innerHTML += /*HTML*/`
+                <div style="color:${myColor}; background-color:${myBgColor}; height:200px; width:200px">
+                    Im a text
+                </div>
+                `
+                myBgColor = ''
+                myColor = ''
+            }
+        }
+
+        drawInput();
+
+    </script>
+</body>
+
+</html>

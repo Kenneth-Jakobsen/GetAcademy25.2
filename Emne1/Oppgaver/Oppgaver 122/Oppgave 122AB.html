@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <div class="dpad">
+        <button onclick="moveUp()" class="up">⬆️</button>
+        <div class="dpad-middle">
+            <button onclick="moveLeft()" class="left">⬅️</button>
+            <button onclick="moveDown()" class="down">⬇️</button>
+            <button onclick="moveRight()" class="right">➡️</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<style>
+    .selected {
+        background-color: yellow;
+    }
+
+    #app {
+        display: grid;
+        grid-template-columns: repeat(8, 100px);
+        grid-template-rows: repeat(8, 100px);
+    }
+
+    #app>div {
+        border: 1px solid lightblue;
+    }
+
+    .dpad {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        margin: 20px;
+    }
+
+    .dpad-middle {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .dpad button {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        background-color: #eee;
+        border: 2px solid #999;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .dpad button:hover {
+        background-color: #ccc;
+    }
+</style>
+<script>
+    const size = 64;
+    let squareIndex = 1
+    const pattern = `<div></div>`;
+    const highlightSquare = `<div class="selected"></div>`;
+    let mainDiv = document.getElementById('app')
+
+    function showBoard() {
+        mainDiv.innerHTML = ``;
+        
+        drawBoard(squareIndex);
+        mainDiv.innerHTML += highlightSquare
+        drawBoard(size - (squareIndex + 1))
+    }
+
+    showBoard();
+
+
+
+    function moveLeft() {
+        squareIndex--;
+        showBoard();
+    };
+
+    function moveRight() {
+        squareIndex++;
+        showBoard();
+    }
+
+    function moveUp() {
+        squareIndex -= 8;
+        showBoard();
+    }
+
+    function moveDown() {
+        squareIndex += 8;
+        showBoard();
+    }
+
+
+    function drawBoard(amount) {
+        document.getElementById('app').innerHTML += pattern.repeat(amount);
+    }
+
+
+</script>
