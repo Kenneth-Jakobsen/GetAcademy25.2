@@ -51,8 +51,11 @@
 
         // 2. Render the table
         function renderTable() {
-            let tbody = document.querySelector("#studentTable tbody");
-            
+            let tableBodyElement = document.querySelector("#studentTable tbody");
+        }
+
+        // 3. Function to update a student’s grade
+        function updateGrade(index, change) {
             // <tr>
             //     <td></td>
             //     <td></td>
@@ -63,18 +66,12 @@
             // </tr>
         }
 
-        // 3. Function to update a student’s grade
-        function updateGrade(index, change) {
-
-        }
-
         // 4. Function to calculate average
         function calculateAverage() {
         }
 
         // 5. Initial render
         renderTable();
-        calculateAverage();
     </script>
 </body>
 

@@ -14,7 +14,7 @@
             border-collapse: collapse;
         }
 
-        th{
+        th {
             background-color: blueviolet;
             color: whitesmoke;
         }
@@ -31,54 +31,100 @@
 
 <body>
     <div id="app">
-
     </div>
 
 
     <script>
 
+        const Task = {
+            text: '',
+            doneDate: null,
+            responsible: 'Kenneth',
+            editMode: false,
+        };
+
+
 
         function updateView() {
             document.getElementById('app').innerHTML = /*HTML*/`
             <table>
-            <tr>
+            <thead>
                 <th>To do</th>
                 <th>Done date</th>
                 <th>Responsible</th>
                 <th>Done</th>
                 <th>Edit</th>
                 <th>Delete</th>
-            </tr>
-            <tr class="toDoTableRow">
+            </thead>
               ${toDoListHtml()}
-            </tr>   
-            </table>
+            </table><br/>
+            <input id="taskInput"  type="text">
+            <button onclick="addTask()">Add task</button>
             `
         }
         updateView();
 
         function toDoListHtml() {
             let html = ``
-            for (let i = 0; i < model.length; i++) {
-                html = /*HTML*/`<td>${model[i].text}</td>
-                <td>${model[i].doneDate}</td>
-                <td>${model[i].responsible}</td>
-                <td><input 
-                    onclick=toDoComplete(${i}) 
-                    type="checkbox" 
-                    ${model[i].doneDate ? "checked": ''}
-                    /></td>
-                <td style="cursor:pointer">✎</td>
-                <td style="cursor:pointer">🗑</td>
+            for (let index = 0; index < model.length; index++) {
+                html += /*HTML*/`
+                <tr class="toDoTableRow">
+                   ${taskRowHtml(index)}
+                    <td><input 
+                        onclick=toDoComplete(${index}) 
+                        type="checkbox" 
+                        ${model[index].doneDate ? "checked" : ''}
+                        /></td>
+                    <td onclick="toggleEditMode(${index})" style="cursor:pointer">✎</td>
+                    <td onclick="deleteTask(${index})" style="cursor:pointer">🗑</td>
+                </tr>
                 `
             }
+
             return html
         }
 
         function toDoComplete(index) {
-            const today = new Date().toISOString().slice(5, 10)
-            model[index].doneDate = today
-            updateView()
+            const today = new Date().toLocaleDateString().slice(0, 4);
+            model[index].doneDate = typeof (model[index].doneDate) == 'string' ? null : today
+            updateView();
+        }
+
+        function deleteTask(index) {
+            model.splice(index, 1);
+            updateView();
+        }
+
+        function addTask() {
+            let text = document.getElementById('taskInput').value.trim();
+            if (!text) return;
+            model.push({ ...Task, text });
+            updateView();
+        }
+
+        function toggleEditMode(index) {
+            model[index].editMode = !model[index].editMode;
+            updateView();
+        }
+
+        function taskRowHtml(index) {
+            let html = ''
+            if (model[index].editMode) {
+                html =
+                /*HTML*/`
+                <td><input value="${model[index].text}" type="text" /></td>
+                <td><input value="${model[index].doneDate}" type="text" /></td>
+                <td><input value ="${model[index].responsible}"type="text"></td>
+                `
+            }
+            else {
+                html = /*HTML*/`
+                    <td>${model[index].text}</td>
+                    <td>${model[index].doneDate}</td>
+                    <td>${model[index].responsible}</td>
+                    `
+            }
+            return html;
         }
 
 
