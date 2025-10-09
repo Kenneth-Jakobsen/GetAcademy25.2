@@ -2,144 +2,263 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="model.js"></script>
-    <style>
-        table,
-        th,
-        td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="model.js"></script>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
 
-        th {
-            background-color: blueviolet;
-            color: whitesmoke;
-        }
+    th {
+      background-color: blueviolet;
+      color: whitesmoke;
+    }
 
-        table {
-            width: 400px;
-        }
+    table {
+      width: 400px;
+    }
 
-        td {
-            text-align: center;
-        }
-    </style>
+    td {
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
-    <div id="app">
+  <div id="app">
+  </div>
+
+
+  <script>
+
+
+    function updateView() {
+      document.getElementById('app').innerHTML = /*HTML*/`
+    <div style="
+      max-width: 750px;
+      margin: 40px auto;
+      font-family: system-ui, sans-serif;
+      background: #fafafa;
+      padding: 24px 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    ">
+      <h2 style="margin-bottom: 20px; text-align:center;">📝 To-Do List</h2>
+
+      <table style="
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 24px;
+      ">
+        <thead>
+          <tr style="background-color: #f2f2f2; border-bottom: 2px solid #ddd;">
+            <th style="padding: 10px; text-align:left;">To do</th>
+            <th style="padding: 10px; text-align:left; cursor:pointer;" onclick="sortByDate()">Done date ⬍</th>
+            <th style="padding: 10px; text-align:left;">Responsible</th>
+            <th style="padding: 10px;">Done</th>
+            <th style="padding: 10px;">Edit</th>
+            <th style="padding: 10px;">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${toDoListHtml()}
+        </tbody>
+      </table>
+
+      <div style="
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-between;
+        align-items: center;
+      ">
+        <input  
+          oninput="model.inputs.newTask.text=this.value"
+          type="text" 
+          placeholder="Write task here"
+          style="
+            flex: 2;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+          "
+        >
+        <input  
+          oninput="model.inputs.newTask.responsible=this.value"
+          type="text"
+          placeholder="Responsible"
+          style="
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+          "
+        >
+        <button 
+          onclick="addTask()"
+          style="
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 16px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+          "
+          onmouseover="this.style.background='#43a047'"
+          onmouseout="this.style.background='#4CAF50'"
+        >
+          ➕ Add task
+        </button>
+
+        <select
+          id="filterSelect"
+          style="
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            background-color: white;
+            cursor: pointer;
+          "
+          onchange="model.inputs.filterByName=this.value;"
+        >
+          <option value="${model.inputs.filterByName}">Filter by name</option>
+          <option>All</option>
+          <option>Kenneth</option>
+          <option>Anna</option>
+          <option>Jonas</option>
+          <option>Maja</option>
+          <option>Eline</option>
+          <option>Per</option>
+          <option>Sara</option>
+          <option>Lina</option>
+        </select>
+      </div>
     </div>
+  `;
+    }
 
 
-    <script>
+    updateView();
 
-        const Task = {
-            text: '',
-            doneDate: null,
-            responsible: 'Kenneth',
-            editMode: false,
-        };
-
-
-
-        function updateView() {
-            document.getElementById('app').innerHTML = /*HTML*/`
-            <table>
-            <thead>
-                <th>To do</th>
-                <th>Done date</th>
-                <th>Responsible</th>
-                <th>Done</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </thead>
-              ${toDoListHtml()}
-            </table><br/>
-            <input id="taskInput"  type="text" placeholder="Write task here">
-            <input id="nameInput"  type="text" placeholder="Responsible">
-            <button onclick="addTask()">Add task</button>
-            `
-        }
-        updateView();
-
-        function toDoListHtml() {
-            let html = ``
-            let tasks = updateTasksToShow();
-            for (let index = 0; index < tasks.length; index++) {
-                html += /*HTML*/`
+    function toDoListHtml() {
+      let html = ``
+      let tasks = updateTasksToShow();
+      for (let index = 0; index < tasks.length; index++) {
+        html += /*HTML*/`
                 <tr class="toDoTableRow">
                    ${taskRowHtml(index)}
                     <td><input 
-                        onclick=toDoComplete(${index}) 
+                        onclick=toggleDone(${index}) 
                         type="checkbox" 
-                        ${model[index].doneDate ? "checked" : ''}
+                        ${model.tasks[index].doneDate ? "checked" : ''}
                         /></td>
                     <td onclick="toggleEditMode(${index})" style="cursor:pointer">✎</td>
                     <td onclick="deleteTask(${index})" style="cursor:pointer">🗑</td>
                 </tr>
                 `
-            }
+      }
+      return html
+    }
 
-            return html
-        }
+    function updateTasksToShow() {
+      let currentPage = 1;
+      const pageSize = 10;
+      let start = (currentPage - 1) * pageSize;
+      let end = start + pageSize;
+      currentPageTasks = model.tasks.slice(start, end)
+      return currentPageTasks
+    }
 
-        function updateTasksToShow() {
-            let currentPage = 1;
-            const pageSize = 3;
-            let start = (currentPage - 1) * pageSize;
-            let end = start + pageSize;
-            currentPageTasks = model.slice(start, end)
-            return currentPageTasks
-        }
+    function toggleDone(index) {
+      const today = new Date().toLocaleDateString('no-NO').slice(0, 4);
+      const task = model.tasks[index];
+      task.doneDate = task.doneDate ? null : today;
+      updateView();
+    }
 
-        function toDoComplete(index) {
-            const today = new Date().toLocaleDateString().slice(0, 4);
-            model[index].doneDate = typeof (model[index].doneDate) == 'string' ? null : today
-            updateView();
-        }
+    function deleteTask(index) {
+      model.tasks.splice(index, 1);
+      updateView();
+    }
 
-        function deleteTask(index) {
-            model.splice(index, 1);
-            updateView();
-        }
+    function filterByName(name) {
+      console.log(name)
+    }
 
-        function addTask() {
-            let text = document.getElementById('taskInput').value.trim();
-            if (!text) return;
-            model.push({ ...Task, text });
-            updateView();
-        }
+    function addTask() {
+      const { text, responsible } = model.inputs.newTask;
+      if (!text.trim()) return alert("Please write a task!");
+      model.tasks.push({
+        text: text.trim(),
+        doneDate: null,
+        responsible: responsible.trim() || 'Someone',
+        editMode: false,
+      });
+      model.inputs.newTask.text = '';
+      model.inputs.newTask.responsible = '';
+      updateView();
+    }
 
-        function toggleEditMode(index) {
-            model[index].editMode = !model[index].editMode;
-            updateView();
-        }
+    function toggleEditMode(index) {
+      model.tasks[index].editMode = !model.tasks[index].editMode;
+      updateView();
+    }
 
-        function taskRowHtml(index) {
-            let html = ''
-            if (model[index].editMode) {
-                html =
+
+    function sortByDate() {
+      model.tasks.sort((a, b) => new Date(a.doneDate) - new Date(b.doneDate))
+      updateView();
+    }
+
+    function taskRowHtml(index) {
+      let html = ''
+      const filteredTasks = model.tasks.filter(task => task.responsible === model.inputs.filterByName);
+      let tasks = model.tasks[index]
+      if (tasks.editMode) {
+        html =
                 /*HTML*/`
-                <td><input value="${model[index].text}" type="text" /></td>
-                <td><input value="${model[index].doneDate}" type="text" /></td>
-                <td><input value ="${model[index].responsible}"type="text"></td>
+                <td><input 
+                    oninput="model.tasks[${index}].text=this.value" 
+                    value="${tasks.text}" 
+                    type="text" />
+                </td>
+
+                <td><input 
+                    oninput="model.tasks[${index}].doneDate=this.value"
+                    value="${tasks.doneDate}" 
+                    type="text" /></td>
+
+                <td><input 
+                    oninput="model.tasks[${index}].responsible=this.value" 
+                    value="${tasks.responsible}"
+                    type="text">
+                </td>
                 `
-            }
-            else {
-                html = /*HTML*/`
-                    <td>${model[index].text}</td>
-                    <td>${model[index].doneDate}</td>
-                    <td>${model[index].responsible}</td>
+      }
+      else {
+        html = /*HTML*/`
+                    <td>${tasks.text}</td>
+                    <td>${tasks.doneDate}</td>
+                    <td>${tasks.responsible}</td>
                     `
-            }
-            return html;
-        }
+      }
+      return html;
+    }
 
 
-    </script>
+  </script>
 </body>
 
 </html>

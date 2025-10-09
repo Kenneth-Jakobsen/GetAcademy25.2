@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+
+    const model = {
+        data: {
+            categories: {
+                swimming: "Svømming",
+                biking: "Sykling",
+                dancing: "Dansing",
+                climbing:'Klatring'
+            },
+
+            activities: [
+                {
+                    id: 0,
+                    name: "Sykling",
+                    category: 'biking',
+                },
+                {
+                    id: 1,
+                    name: "Bading",
+                    category: 'swimming',
+                },
+            ],
+            Users:{
+
+            }
+        },
+
+        User:{
+            password:'',
+            email:''
+        },
+
+
+    };
+
+
+
+    // const activity = model.data.activities[0];
+    // console.log(activity.category);
+
+
+    ```
+    Activities
+    --------------------------------------------------------------------------------------------------------
+    id | name    | rating | difficulty | description | duration | dateAdded  | category  | userName | userEmail userAdress 
+    0  | Sykling | 3      | 2          | Gøy         | 15       | 01-10-2025 | Sykling   | Bjarne   | b@post.no 
+    1  | Bading  | 5      | 1          | Vått        | 30       | 04-09-2025 | Svømming  | Bjarne   | b@post.no
+    
+    ```
+
+
+```
+Activities
+----------------------------------------------------
+id | name    | rating | difficulty | description | duration | dateAdded  | categoryId | userId
+0  | Sykling | 3      | 2          | Gøy         | 15       | 2025-10-01 | 1          | 10
+1  | Bading  | 5      | 1          | Vått        | 30       | 2025-09-04 | 2          | 10
+
+
+Categories
+--------------------------
+categoryId | categoryName
+1          | Sykling
+2          | Svømming
+
+
+Users
+------------------------------------------------
+userId | userName | userEmail   | userPhone adressse
+10     | Bjarne   | b@post.no   | 99988777
+
+
+Comments
+---------------------------------------------------------
+commentId | activityId | userId | rating | text
+100       | 0          | 10     | 2      | Ikke gøy
+101       | 1          | 10     | 5      | Veldig gøy
+
+```
+
+
+
+
+
+
+
+</script>
